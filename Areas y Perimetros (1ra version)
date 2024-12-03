@@ -1,0 +1,112 @@
+Programa 2: Software para calcular areas y perimetros de figuras geometricas
+
+package POO;
+import javax.swing.JOptionPane;
+
+public class CalculadoraGeometrica {
+    
+    public void mostrarMenu(int opcion){
+        opcion = Integer.parseInt(JOptionPane.showInputDialog("Software para calcular areas y perimetros de figuras geometricas. Digite una opción"
+                + "\n1.- Circulo"
+                + "\n2.- Cuadrado"
+                + "\n3.- Rectangulo"
+                + "\n4.- Triangulo"));
+    }
+    
+    public void ejecutarPrograma(int opcion){
+        switch (opcion){
+            case 1:
+                float radio = Float.parseFloat(JOptionPane.showInputDialog("Ingrese el radio del circulo"));
+                JOptionPane.showMessageDialog(null,"El area del circulo es de "+calcularArea(radio)+""
+                        + " y su perimetro es de "+calcularPerimetro(radio));
+                break;
+                
+            case 2:
+                int lado = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el lado del cuadrado"));
+                JOptionPane.showMessageDialog(null,"El area del cuadrado es de "+calcularArea(lado)+""
+                        + " y su perimetro es de "+calcularPerimetro(lado));
+                break;
+                
+            case 3:
+                int base = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la base del rectangulo"));
+                int altura = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la altura del rectangulo"));
+                
+                JOptionPane.showMessageDialog(null,"El area del circulo es de "+calcularArea(base, altura)+""
+                        + " y su perimetro es de "+calcularPerimetro(base, altura));
+                break;
+                
+            case 4:
+                float base2 = Float.parseFloat(JOptionPane.showInputDialog("Ingrese la base del rectangulo"));
+                float altura2 = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la altura del rectangulo"));
+                float lado2 = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el valor de uno de los lados del triangulo"));
+                
+                JOptionPane.showMessageDialog(null,"El area del circulo es de "+calcularArea(base2, altura2)+""
+                        + " y su perimetro es de "+calcularPerimetro(base2, altura2, lado2));
+                break;
+        }
+    }
+    
+    // Circulo
+    public float calcularArea(float radio){
+        return ((float)Math.PI) * ((float)Math.pow(radio,2));
+    }
+    
+    public float calcularPerimetro(float radio){
+        return 2 * ((float)Math.PI) * radio;
+    }
+    
+    // Cuadrado    
+    public int calcularArea(int lado){
+        return (int)Math.pow(lado,2);
+    }
+    
+    public int calcularPerimetro(int lado){
+        return 4 * lado;
+    }
+    
+    // Rectangulo
+    public int calcularArea(int base, int altura){
+        return base * altura;
+    }
+    
+    public int calcularPerimetro(int base, int altura){
+        return 2 * (base + altura);
+    }
+    
+    // Triangulo 
+    public float calcularArea(float base, float altura){
+        return (base * altura) / 2;
+    }
+    
+    public float calcularPerimetro(float lado1, float lado2, float lado3){
+        return lado1 + lado2 + lado3;
+    }
+}
+
+Metodo main
+
+package POO;
+import javax.swing.JOptionPane;
+
+public class main {
+    public static void main(String[] args) {
+        CalculadoraGeometrica calculadora = new CalculadoraGeometrica();
+        
+        int opcion = Integer.parseInt(JOptionPane.showInputDialog("Software para calcular areas y perimetros de figuras geometricas. Digite una opción"
+                + "\n1.- Circulo"
+                + "\n2.- Cuadrado"
+                + "\n3.- Rectangulo"
+                + "\n4.- Triangulo"));
+        
+        do {
+            calculadora.ejecutarPrograma(opcion);
+            opcion = Integer.parseInt(JOptionPane.showInputDialog("Software para calcular areas y perimetros de figuras geometricas. Digite una opción"
+                + "\n1.- Circulo"
+                + "\n2.- Cuadrado"
+                + "\n3.- Rectangulo"
+                + "\n4.- Triangulo"
+                + "\n0.- Salir del programa"));
+            
+        } while (opcion != 0);
+    }
+}
