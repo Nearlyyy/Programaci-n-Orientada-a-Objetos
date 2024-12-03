@@ -1,0 +1,115 @@
+Programa 1: Implemento la clase "CuentaBancaria" con los siguientes atributos y métodos
+
+Atributos: saldo (de la cuenta), titular (nombre del titular de la cuenta)
+Metodos: Constructor, mostrarSaldo(), depositar(), retirar()
+
+Clase "CuentaBancaria"
+
+package POO;
+import javax.swing.JOptionPane;
+
+public class CuentaBancaria {
+    private double saldo;
+    public String titular;
+    
+    public CuentaBancaria (double saldo, String titular)
+    {
+        this.titular = titular;
+        
+        if(saldo >= 0){
+            this.saldo = saldo;
+        } else {
+            JOptionPane.showMessageDialog(null,"El saldo ingresado es inválido. Se establecerá en 0 por defecto");
+            this.saldo = 0;
+        }
+    }
+
+    public double getSaldo() {
+        return saldo;
+    }
+
+    public String getTitular() {
+        return titular;
+    }
+    
+    public void mostrarSaldo(){
+        JOptionPane.showMessageDialog(null,"Usted posee $"+saldo+" en su cuenta");
+    }
+    
+    public void mostrarInformacion(){
+        JOptionPane.showMessageDialog(null,"Nombre del titular: "+getTitular()+"\nSaldo en la cuenta: $"+getSaldo());
+    }
+    
+    public void depositar (){
+        double deposito = Double.parseDouble(JOptionPane.showInputDialog("¿Cuanto dinero desea depositar?"));
+        
+        if(deposito > 0){
+            saldo += deposito;
+            JOptionPane.showMessageDialog(null,"Se han depositado exitosamente $"+deposito+" a su cuenta");
+        } else {
+            JOptionPane.showMessageDialog(null,"Se ha ingresado una cantidad inválida");
+        }
+        
+        mostrarSaldo();
+    }
+    
+    public void retirar (){
+        double retiro = Double.parseDouble(JOptionPane.showInputDialog("¿Cuanto dinero desea retirar?"));
+        
+        if(retiro > 0 && retiro <= saldo){
+            saldo -= retiro;
+            JOptionPane.showMessageDialog(null,"Se han retirado exitosamente $"+retiro+" de su cuenta");
+        } else {
+            JOptionPane.showMessageDialog(null,"Se ha ingresado una cantidad inválida");
+        }
+        
+        mostrarSaldo();
+    }
+    
+    public void cuentaBancaria(int opcion){
+        switch (opcion){
+            case 1: mostrarInformacion(); break;
+            case 2: depositar(); break;
+            case 3: retirar(); break;
+        }
+    }
+    
+    public void menu(){
+        int opcion = Integer.parseInt(JOptionPane.showInputDialog("Bienvenido al banco. Por favor elija una opción"
+                + "\n1.- Mostrar información de la cuenta"
+                + "\n2.- Realizar un deposito"
+                + "\n3.- Realizar un retiro"
+                + "\n0.- Cancelar"));
+    }
+}
+
+Método main
+
+package POO;
+import javax.swing.JOptionPane;
+
+public class main {
+    
+    public static void main(String[] args) {
+        String titular = JOptionPane.showInputDialog("Ingrese el nombre del titular de la cuenta");
+        double saldo = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el saldo inicial para su cuenta"));
+                
+        CuentaBancaria cb1 = new CuentaBancaria(saldo, titular);
+        
+        int opcion = Integer.parseInt(JOptionPane.showInputDialog("Bienvenido al banco. Por favor elija una opción"
+                + "\n1.- Mostrar información de la cuenta"
+                + "\n2.- Realizar un deposito"
+                + "\n3.- Realizar un retiro"
+                + "\n0.- Salir"));
+        
+        do{
+            cb1.cuentaBancaria(opcion);
+            opcion = Integer.parseInt(JOptionPane.showInputDialog("Ingrese otra opcion"
+                    + "\n1.- Mostrar saldo en la cuenta"
+                    + "\n2.- Realizar un deposito"
+                    + "\n3.- Realizar un retiro"
+                    + "\n0.- Cancelar"));
+            
+        }while(opcion != 0);
+    }
+}
