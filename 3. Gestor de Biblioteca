@@ -1,0 +1,89 @@
+3. Implemente un programa de Java con POO que me permita gestionar una biblioteca, añadiendo libros. Cada libro tendrá como atributos su titulo, nombre del autor, año de publicacion
+y numero de paginas. Igualmente se crearán metodos para obtener metodos para obtener cada atributo, para mostrar la informacion y para verificar si es antiguo o no (año de publicacion
+inferior a 1980)
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Libro {
+
+    String titulo, autor;
+    int año, paginas;
+
+    public Libro(String titulo, String autor, int año, int paginas){
+        this.titulo = titulo;
+        this.autor = autor;
+        this.año = año;
+        this.paginas = paginas;
+    }
+
+    public String getTitulo(){
+        return titulo;
+    }
+
+    public String getAutor(){
+        return autor;
+    }
+
+    public int getAño(){
+        return año;
+    }
+
+    public int getPaginas(){
+        return paginas;
+    }
+
+    public void mostrarInformacion(){
+        System.out.print("Nombre del libro: "+getTitulo()+"\nNombre del autor: "+getAutor()+"\nAño de publicación: "+getAño()+"\nNO. de páginas: "+getPaginas());
+        System.out.print("\n¿Es un libro antiguo?: "+(esAntiguo() ? "Si" : "No"));
+    }
+
+    public boolean esAntiguo(){
+        return getAño() < 1980;
+    }
+
+    public static void añadirLibros(ArrayList <Libro> libros, Scanner sc){
+        System.out.print("¿Cuantos libros desea ingresar?: ");
+        int cantidadDeLibros = sc.nextInt();
+        sc.nextLine();
+
+        for (int i = 0; i < cantidadDeLibros; i++) {
+            String nombreLibro, nombreAutor;
+            int añoPublicacion, numeroPaginas;
+    
+            System.out.print("Ingrese el nombre del libro: ");
+            nombreLibro = sc.nextLine();
+            
+            System.out.print("Ingrese el nombre del autor: ");
+            nombreAutor = sc.nextLine();
+    
+            System.out.print("Ingrese el año de publicación del libro: ");
+            añoPublicacion = sc.nextInt();
+            sc.nextLine();
+    
+            System.out.print("Ingrese el numero de paginas del libro: ");
+            numeroPaginas = sc.nextInt();
+            sc.nextLine();
+    
+            libros.add(new Libro(nombreLibro, nombreAutor, añoPublicacion, numeroPaginas));
+        }
+    }
+
+    public static void mostrarLibros(ArrayList <Libro> libros){
+        int cantidad = 1;
+        for (Libro libro : libros) {
+            System.out.print("Cantidad #"+cantidad+"\n");
+            libro.mostrarInformacion();
+            cantidad++;
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        ArrayList <Libro> libros = new ArrayList<>();
+
+        añadirLibros(libros, sc);
+        mostrarLibros(libros);
+    }
+}
