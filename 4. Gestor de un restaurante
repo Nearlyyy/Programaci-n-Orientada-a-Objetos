@@ -1,0 +1,118 @@
+Programa 4: Gestor de un restaurante
+
+Crear 3 clases:
+Clase Plato: que tenga como atributos el nombre del platillo y su precio, además de metodos getters y otro para obtener la informacion del platillo
+Clase Pedido: que tenga como atributos un objeto de la clase plato y la cantidad de pedidos que se realizaran, ademas de metodos para calcular el precio total y mostrar la informacion final
+Clase Restaurante: que incluya 3 objetos (platillos) y me permita seleccionar uno además de cuantos quiero pedir. Se me mostrará la cantidad que pedi, el precio unitario y el precio total
+
+Clase Plato
+
+package model;
+
+public class Plato {
+    String nombre;
+    double precio;
+
+    public Plato(String nombre, double precio){
+        this.nombre = nombre;
+        this.precio = precio;
+    }
+
+    public String getNombre(){
+        return nombre;
+    }
+
+    public double getPrecio(){
+        return precio;
+    }
+
+    public void mostrarPlato(){
+        System.out.print("\nNombre del pedido: "+getNombre()+"\nPrecio: $"+String.format("%.2f", getPrecio())+"\n");
+    }
+}
+
+Clase Pedido:
+
+package model;
+
+public class Pedido {
+    Plato plato;
+    int cantidad;
+
+    public Pedido(Plato plato, int cantidad){
+        this.plato = plato;
+        this.cantidad = cantidad;
+    }
+
+    public int getCantidad(){
+        return cantidad;
+    }
+
+    public String calcularTotal(){ 
+        return String.format("%.2f", (plato.getPrecio() * cantidad));
+    }
+
+    public void mostrarElPedido(){
+        System.out.println("Nombre del pedido: "+plato.getNombre()+"\nPrecio unitario: $"+String.format("%.2f", plato.getPrecio())+"\nCantidades pedidas: "+getCantidad()+"\nCosto total: $"+calcularTotal());
+    }
+}
+
+Clase Restaurante: 
+
+package app;
+
+import java.util.Scanner;
+
+import model.Pedido;
+import model.Plato;
+
+public class Restaurante {
+
+    public static void mostrarDatos(Plato platillo, int cantidad){
+        Pedido pedido = new Pedido(platillo, cantidad);
+        System.out.print("Pedido realizado con exito!\n");
+        pedido.mostrarElPedido();
+        System.out.print("Gracias por su compra! :D");
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        Plato pizza = new Plato("Pizza",2.50);
+        Plato hamburguesa = new Plato("Hamburguesa",3.50);
+        Plato salchipapa = new Plato("Salchipapa",1.00);
+
+        System.out.print("¡Bienvenido a mi restaurante!\nMenú de hoy:\n");
+        System.out.println("__________________________________________________________");
+
+        pizza.mostrarPlato();
+        hamburguesa.mostrarPlato();
+        salchipapa.mostrarPlato();
+        System.out.println("__________________________________________________________");
+
+        System.out.print("\n¿Qué platillo desea ordenar?\n1. Pizza\n2.Hamburguesa\n3. Salchipapa\nOpcion: ");
+        int opcion = sc.nextInt();
+        sc.nextLine();
+
+        System.out.print("¿Cuantos desea ordenar?: ");
+        int cantidad = sc.nextInt();
+        sc.nextLine();
+        System.out.println("__________________________________________________________");
+
+        switch(opcion){
+            case 1:
+               mostrarDatos(pizza, cantidad); break;
+
+
+            case 2:
+               mostrarDatos(hamburguesa, cantidad); break;
+
+            case 3: 
+               mostrarDatos(salchipapa, cantidad); break; 
+
+            default:
+            System.out.print("Opcion no válida :("); break;
+        }
+        sc.close();
+    }
+}
