@@ -1,0 +1,57 @@
+Programa 6: Crear un programa basado en POO que haga uso de la herencia. Se debera crear una clase padre "Animal" y dos clases hijas "Perro" y "Gato". Cada una debe debe tener un constructor
+y un metodo que imprima el sonido caracteristico que realiza cada animal
+
+package ClasesYObjetos;
+
+public class Animal {  
+    String nombre;
+
+    public Animal(String nombre){
+        this.nombre = nombre;
+    }
+
+    public void hacerSonido(){
+        System.out.println(nombre+" hace un sonido");
+    }
+}
+
+package ClasesYObjetos;
+
+public class Gato extends Animal {
+
+    public Gato(String nombre){
+        super(nombre);
+    }
+ 
+    @Override
+    public void hacerSonido(){
+        System.out.println(nombre+" hace miau!");
+    }
+}
+
+package ClasesYObjetos;
+
+public class Perro extends Animal {
+
+    public Perro(String nombre){
+        super(nombre);
+    }
+    @Override
+    public void hacerSonido(){
+        System.out.println(nombre+" hace guau!");
+    }
+}
+
+package ClasesYObjetos;
+
+public class main {
+    public static void main (String[] args) {
+        Animal animal = new Animal("Animalito");
+        Gato gato = new Gato("Tom");
+        Perro perro = new Perro("Pepito");
+
+        animal.hacerSonido();
+        gato.hacerSonido();
+        perro.hacerSonido();
+    }
+}
